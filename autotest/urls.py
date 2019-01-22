@@ -23,5 +23,7 @@ urlpatterns = [
     path('login/', views.login),
     path('home/', views.home),
     path('logout/', views.logout),
-    path('product_manage',proviews.product_manage),
+    path('product_manage/',proviews.product_manage),
+    path('apitest_manage/',views.apitest_manage),
+    path('apistep_manage/',views.apistep_manage),
 ]
