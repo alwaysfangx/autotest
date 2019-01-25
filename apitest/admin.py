@@ -20,7 +20,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ['productname','productdesc','create_time','id']
     inlines = [ApisAdmin]
 
-#admin.site.register(Apitest,ApitestAdmin)
-admin.site.register(Apitest)
-admin.site.register(Apistep)
+admin.site.register(Apitest,ApitestAdmin)
+# admin.site.register(Apistep,ApistepAdmin)
+# admin.site.register(Apistep)
 admin.site.register(Apis)
