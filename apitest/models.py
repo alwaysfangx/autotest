@@ -29,6 +29,7 @@ class Apistep(models.Model):
         return self.apiname
 
 class Apis(models.Model):
+
     Product = models.ForeignKey('product.Product',on_delete = models.CASCADE,null=True)
     apiname = models.CharField('接口名称',max_length=100)
     apiurl = models.CharField('url地址', max_length=200)

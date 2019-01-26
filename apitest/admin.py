@@ -13,12 +13,6 @@ class ApitestAdmin(admin.ModelAdmin):
 
 class ApisAdmin(admin.TabularInline):
     list_display = ['apiname', 'apiurl', 'apiparamvalue', 'apimethod', 'apiresult', 'apistatus', 'creat_time', 'id','product']
-    model = Apis
-    extra = 1
-
-class ProductAdmin(admin.ModelAdmin):
-    list_display = ['productname','productdesc','create_time','id']
-    inlines = [ApisAdmin]
 
 admin.site.register(Apitest,ApitestAdmin)
 # admin.site.register(Apistep,ApistepAdmin)

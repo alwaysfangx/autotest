@@ -48,4 +48,4 @@ def apistep_manage(request):
 def apis_manage(request):
     username = request.session.get('user','')
     apis_list = Apis.objects.all()
-    return render(request,'apis_manage.html',{"user":username,"apis":apis_list})
+    return render(request,"apis_manage.html",{"user":username,"apiss":apis_list})
