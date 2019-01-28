@@ -7,7 +7,7 @@ class Appcase(models.Model):
     appcasename = models.CharField('用例名称',max_length=100)
     apptestresult = models.BooleanField('测试结果')
     apptester = models.CharField('测试负责人', max_length=16)
-    creat_time = models.DateTimeField('创建时间',auto_now=True)
+    create_time = models.DateTimeField('创建时间',auto_now=True)
 
     class Meta:
         verbose_name = 'app测试用例'
@@ -27,7 +27,7 @@ class Appcasestep(models.Model):
     apptestdata = models.CharField('测试数据', max_length=200,null=True)
     appassertdata = models.CharField('验证数据', max_length=200)
     apptestresult = models.BooleanField('测试结果')
-    creat_time = models.DateTimeField('创建时间',auto_now=True)
+    create_time = models.DateTimeField('创建时间',auto_now=True)
 
     def __str__(self):
         return self.appteststep

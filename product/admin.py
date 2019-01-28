@@ -1,6 +1,8 @@
 from django.contrib import admin
 from product.models import Product
 from apitest.models import Apis
+from apptest.models import Appcase
+from webtest.models import Webcase
 # Register your models here.
 
 class ApisAdmin(admin.TabularInline):
@@ -8,8 +10,15 @@ class ApisAdmin(admin.TabularInline):
     model = Apis
     extra = 1
 
+class AppcaseAdmin(admin.TabularInline):
+    list_display = ['appcasename','apptestresult','create_time','id','product']
+    model = Appcase
+    extra = 1
+
+#备注：书上是一个个加的
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['productname','productdesc','create_time','id']
-    inlines = [ApisAdmin]
+    list_display = ['productname','productdesc','creaate_time','id']
+    inlines = [AppcaseAdmin,ApisAdmin]
+
 
 admin.site.register(Product)
