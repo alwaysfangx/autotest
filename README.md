@@ -1,2 +1,2 @@
 # readme
-fx
+fx日常学习代码
