@@ -30,6 +30,7 @@ urlpatterns = [
     path('apistep_manage/',views.apistep_manage),
     path('apis_manage/',views.apis_manage),
     path('bug_manage/',bugviews.bug_manage),
-    path('set_manage/',setviews.set_manage)
+    path('set_manage/',setviews.set_manage),
+    path('user/',setviews.set_user),
 
 ]

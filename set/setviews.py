@@ -12,5 +12,5 @@ def set_manage(request):
 def set_user(request):
     user_list = User.objects.all()
     username = request.session.get('user','')
-    return render(request,"set_manage.html",{"user":username,"users":user_list})
+    return render(request,"set_user.html",{"user":username,"users":user_list})
 
