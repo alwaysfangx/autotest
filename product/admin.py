@@ -15,10 +15,16 @@ class AppcaseAdmin(admin.TabularInline):
     model = Appcase
     extra = 1
 
+class WebcaseAdmin(admin.TabularInline):
+    list_display = ['webcasename','webtestresult','create_time','id','product']
+    model = Webcase
+    extra = 1
+
+
 #备注：书上是一个个加的
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['productname','productdesc','creaate_time','id']
-    inlines = [AppcaseAdmin,ApisAdmin]
+    inlines = [AppcaseAdmin,ApisAdmin,WebcaseAdmin]
 
 
 admin.site.register(Product)
