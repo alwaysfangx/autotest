@@ -39,5 +39,5 @@ urlpatterns = [
     path('appcasestep_manage/',appviews.appcasestep_manage),
     path('webcase_manage',webviews.webcase_manage),
     path('webcasesteo_manage',webviews.webcasesteo_manage),
-
+    path('test_report/',views.test_report),
 ]
