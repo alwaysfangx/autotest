@@ -9,23 +9,34 @@ from trace import CoverageResults
 import json
 from idlelib.rpc import response_queue
 from time import sleep
+from apitest.HTMLTestRunner import HTMLTestRunner
+import unittest
 
 HOSTNAME = '127.0.0.1'
 
-def readSQLcase():
-    sql = "SELECT id,'apiname',apiurl,apimethod,apiparamvalue,apiresult,'apistatus' from apitest_apistep where apitest_apistep.Apitest_id=3"
-    coon = pymysql.connect(user='root', passwd='123456',db='autotest', port=3306,host='127.0.0.1',charset='utf8')
-    cursor = coon.cursor()
-    aa = cursor.execute(sql)
-    info =cursor.fetchmany(aa)
-    for ii in info:
-        case_list = []
-        case_list.append(ii)
-        #CredentialId()
-        interfaceTest(case_list)
-    coon.commit()
-    cursor.close()
-    coon.close()
+class ApiFlow(unittest.TestCase):
+    '''登录支付购物接口流程'''
+    def setUp(self):
+        time.sleep(1)
+
+    def test_readSQLcase(self):
+        sql = "SELECT id,'apiname',apiurl,apimethod,apiparamvalue,apiresult,'apistatus' from apitest_apistep where apitest_apistep.Apitest_id=3"
+        coon = pymysql.connect(user='root', passwd='123456', db='autotest', port=3306, host='127.0.0.1', charset='utf8')
+        cursor = coon.cursor()
+        aa = cursor.execute(sql)
+        info = cursor.fetchmany(aa)
+        for ii in info:
+            case_list = []
+            case_list.append(ii)
+            # CredentialId()
+            interfaceTest(case_list)
+        coon.commit()
+        cursor.close()
+        coon.close()
+
+    def tearDown(self):
+        time.sleep(1)
+
 
 def interfaceTest(case_list):
     res_flags = []
@@ -196,6 +207,19 @@ def taskno(param):
     taskno = 'task_'+str(a)
     return taskno
 
+def caseWriteResult1(case_id,result):
+    result = result.encode('utf-8')
+    now = time.strftime("%Y-%m-%d %H:%M:%S")
+    sql = "UPDATE apitest_apis set apitest_apis.apiresponse=%s,apitest_apis.apistatus=%s,apitest_apis.create_time=%s where apitest_apis.id=%s;"
+    param = (result,now,case_id)
+    print ('api autotest result is '+result.decode())
+    coon = pymysql.connect(user='root',passwd='123456',db='autotest',port=3306,host='127.0.0.1',charset='utf8')
+    cursor = coon.cursor()
+    cursor.execute(sql,param)
+    coon.commit()
+    cursor.close()
+    coon.close()
+
 def writeResult(case_id,result):
     result = result.encode('utf-8')
     now = time.strftime("%Y-%m-%d %H:%M:%S")
@@ -226,8 +250,14 @@ def writeBug(bug_id,intterface_name,request,response,res_check):
     coon.close()
 
 if __name__ == '__main__':
-    readSQLcase()
-    print('Done!')
+    now = time.strftime("%Y-%m-%d %H:%M:%S")
+    testunit = unittest.TestSuite()
+    testunit.addTest(ApiFlow("test_readSQLcase"))
+    filename = "D:\\QQ"+"apitest_report.html"
+    fp = open(filename,'wb')
+    runner = HTMLTestRunner(stream=fp,title=u"流程接口测试报告",description=u"流程场景接口")
+    runner.run(testunit)
+    print('done')
     time.sleep(1)
 
 
